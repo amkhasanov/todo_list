@@ -1,10 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tasks</title>
-</head>
-<body>
-    <h3>My ToDo list</h3>
-</body>
-</html>
+{% extends 'base/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <div>
+        <h1>Привет {{request.user|title}}</h1>
+        <h3 style="margin:0">У Вас <i>{{count}}</i> задач(и)</h3>
+    </div>
+
+{% if request.user.is_authenticated %}
+<a href="{% url 'logout' %}">Выйти</a>
+{% else %}
+<a href="{% url 'login' %}">Войти</a>
+{% endif %}
+
+</div>
+
+
+<hr>
+<div class="inner">
+    <h3>My ToDo list {{color}}</h3>
+
+    <div class="inner-row">
+        <a href="{% url 'task-create'  %}" class="add-task">Добавить задачу</a>
+
+        <form method="get" class="form-search">
+            <input type="text" name="search-area" value="{{search_input}}" class="form-control">
+            <input type="submit" value="Поиск" class="form-submit">
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Задачи</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{% if task.complete %}
+            <div class="task-complete-icon"></div>
+                {% else %}
+                <div class="task-incomplete-icon"></div>
+                {% endif %}
+            </td>
+
+            <td>{{task.title}}</td>
+            <td><a href="{% url 'task-update' task.id %}">Редактировать</a></td>
+            <td><a href="{% url 'task-delete' task.id %}">Удалить</a></td>
+        </tr>
+        {% empty %}
+        <h3>Нет элементов для отображения</h3>
+
+        {% endfor %}
+    </table>
+</div>
+
+
+{% endblock content %}
+
