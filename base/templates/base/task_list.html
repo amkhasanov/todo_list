@@ -38,7 +38,7 @@
         </tr>
         {% for task in tasks %}
         <tr>
-            <td>{% if task.complete %}
+            <td>{% if task.is_completed %}
             <div class="task-complete-icon"></div>
                 {% else %}
                 <div class="task-incomplete-icon"></div>
