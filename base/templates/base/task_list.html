@@ -45,7 +45,7 @@
                 {% endif %}
             </td>
 
-            <td>{{task.title}}</td>
+            <td><a href="{% url 'task' task.id %}">{{task.title}}</a></td>
             <td><a href="{% url 'task-update' task.id %}">Редактировать</a></td>
             <td><a href="{% url 'task-delete' task.id %}">Удалить</a></td>
         </tr>

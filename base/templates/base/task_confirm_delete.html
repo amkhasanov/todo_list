@@ -2,11 +2,13 @@
 
 {% block content %}
 <div class="inner">
-<a href="{% url 'tasks' %}">Отменить</a>
-<form method="POST">
-    {% csrf_token %}
+    <div class="header-bar">
+        <a href="{% url 'tasks' %}">Отменить</a>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
     <p>Вы действительно хотите удалить эту задачу? "{{task}}"</p>
     <input type="submit" value="Удалить"/>
-</form>
+    </form>
 </div>
 {% endblock content %}
